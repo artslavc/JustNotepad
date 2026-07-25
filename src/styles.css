@@ -1,0 +1,547 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.title-bar {
+    background-color: #ffffff;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    border-bottom: 1px solid #d0d0d0;
+    -webkit-app-region: drag;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.title-bar-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.title-bar-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.title-bar-controls {
+    display: flex;
+    gap: 4px;
+    -webkit-app-region: no-drag;
+}
+
+.title-bar-controls button {
+    width: 28px;
+    height: 22px;
+    border: none;
+    background: transparent;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #333;
+    transition: background 0.15s, color 0.3s;
+}
+
+.title-bar-controls button:hover {
+    background: #e0e0e0;
+}
+
+.title-bar-controls button:last-child:hover {
+    background: #e81123;
+    color: white;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 8px 16px;
+    flex-shrink: 0;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.button-overlay {
+    display: flex;
+    gap: 8px;
+}
+
+.button-overlay button {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #333;
+    transition: background 0.2s, color 0.3s;
+    position: relative;
+}
+
+.button-overlay button:hover {
+    background-color: #f0f0f0;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    margin: 0 16px 16px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    outline: none;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-y: auto;
+    user-select: text;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+/* Скроллбар */
+main::-webkit-scrollbar {
+    width: 8px;
+}
+
+main::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+main::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 4px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+    background: #a0a0a0;
+}
+
+main.dark-theme::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+main.dark-theme::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
+
+/* Выпадающее меню */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 220px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.menu-item {
+    padding: 6px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #333;
+    transition: background-color 0.2s, color 0.3s;
+}
+
+.menu-item:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 4px 12px;
+}
+
+/* Переключатель */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 22px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+    background-color: #2196F3;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+/* Контролы масштаба */
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.zoom-controls button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #d0d0d0;
+    background: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: background 0.2s, color 0.3s, border-color 0.3s;
+}
+
+.zoom-controls button:hover {
+    background: #f0f0f0;
+}
+
+#zoomLevel {
+    min-width: 40px;
+    text-align: center;
+    font-size: 13px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+body.dark-theme {
+    background-color: #1e1e1e;
+}
+
+.title-bar.dark-theme {
+    background-color: #2d2d2d;
+    border-bottom-color: #3d3d3d;
+}
+
+.title-bar.dark-theme .title-bar-text {
+    color: #ffffff;
+}
+
+.title-bar.dark-theme .title-bar-controls button {
+    color: #ffffff;
+}
+
+.title-bar.dark-theme .title-bar-controls button:hover {
+    background: #3d3d3d;
+}
+
+.title-bar.dark-theme .title-bar-controls button:last-child:hover {
+    background: #e81123;
+}
+
+header.dark-theme {
+    background-color: #2d2d2d;
+    border-bottom-color: #3d3d3d;
+}
+
+.button-overlay button.dark-theme {
+    color: #ffffff;
+}
+
+.button-overlay button.dark-theme:hover {
+    background-color: #3d3d3d;
+}
+
+main.dark-theme {
+    background-color: #252525;
+    color: #d4d4d4;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-menu.dark-theme {
+    background: #2d2d2d;
+    border-color: #3d3d3d;
+}
+
+.menu-item.dark-theme {
+    color: #d4d4d4;
+}
+
+.menu-item.dark-theme:hover {
+    background-color: #3d3d3d;
+}
+
+.dropdown-menu .menu-divider.dark-theme {
+    background-color: #3d3d3d;
+}
+
+.zoom-controls button.dark-theme {
+    border-color: #3d3d3d;
+    background: #2d2d2d;
+    color: #d4d4d4;
+}
+
+.zoom-controls button.dark-theme:hover {
+    background: #3d3d3d;
+}
+
+#zoomLevel.dark-theme {
+    color: #d4d4d4;
+}
+
+#resetZoom.dark-theme {
+    color: #d4d4d4 !important;
+}
+
+#resetZoom.dark-theme:hover {
+    background-color: #3d3d3d;
+}
+
+.slider.dark-theme {
+    background-color: #3d3d3d;
+}
+
+.wallpaper-submenu {
+    display: none;
+    border-top: 1px solid #e0e0e0;
+    padding: 4px 0;
+    background: #fafafa;
+}
+
+.wallpaper-submenu.show {
+    display: block;
+}
+
+.wallpaper-submenu .menu-item {
+    padding-left: 28px;
+    cursor: pointer;
+}
+
+.wallpaper-submenu .menu-item:hover {
+    background-color: #e8e8e8;
+}
+
+.wallpaper-submenu .menu-item.active {
+    background-color: #d0e8ff;
+    font-weight: 500;
+}
+
+.wallpaper-submenu.dark-theme {
+    border-top-color: #3d3d3d;
+    background: #252525;
+}
+
+.wallpaper-submenu.dark-theme .menu-item:hover {
+    background-color: #3d3d3d;
+}
+
+.wallpaper-submenu.dark-theme .menu-item.active {
+    background-color: #1a3a5c;
+}
+
+body.has-wallpaper::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: -1;
+}
+
+body.has-wallpaper {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body.has-wallpaper main {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+body.has-wallpaper.dark-theme main {
+    background-color: rgba(37, 37, 37, 0.85);
+}
+
+main.uniform-margin {
+    margin: 16px;
+}
+
+.recent-submenu {
+    display: none;
+    border-top: 1px solid #e0e0e0;
+    padding: 4px 0;
+    background: #fafafa;
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.recent-submenu.show {
+    display: block;
+}
+
+.recent-submenu .menu-item {
+    padding-left: 28px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 280px;
+    color: #333;
+}
+
+.recent-submenu .menu-item:hover {
+    background-color: #e8e8e8;
+}
+
+.recent-submenu.dark-theme {
+    border-top-color: #3d3d3d;
+    background: #252525;
+}
+
+.recent-submenu.dark-theme .menu-item {
+    color: #d4d4d4;
+}
+
+.recent-submenu.dark-theme .menu-item:hover {
+    background-color: #3d3d3d;
+}
+
+.shortcut-hint {
+    color: #888;
+    font-size: 12px;
+    margin-left: 24px;
+}
+
+.menu-item.dark-theme .shortcut-hint {
+    color: #999;
+}
+
+.find-bar {
+    display: none;
+    background: #ffffff;
+    border-bottom: 1px solid #d0d0d0;
+    padding: 8px 16px;
+    flex-shrink: 0;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.find-bar.show {
+    display: block;
+}
+
+.find-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.find-row:last-child {
+    margin-bottom: 0;
+}
+
+.find-bar input {
+    flex: 1;
+    padding: 4px 8px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 13px;
+    outline: none;
+    background: #ffffff;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    user-select: text;
+}
+
+.find-bar input:focus {
+    border-color: #2196F3;
+}
+
+.find-bar button {
+    padding: 4px 10px;
+    border: 1px solid #d0d0d0;
+    background: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #333;
+    transition: background 0.2s, color 0.3s, border-color 0.3s;
+}
+
+.find-bar button:hover {
+    background: #f0f0f0;
+}
+
+.find-bar button:active {
+    background: #e0e0e0;
+}
+
+.find-bar.dark-theme {
+    background: #2d2d2d;
+    border-bottom-color: #3d3d3d;
+}
+
+.find-bar.dark-theme input {
+    background: #1e1e1e;
+    border-color: #3d3d3d;
+    color: #d4d4d4;
+}
+
+.find-bar.dark-theme input:focus {
+    border-color: #2196F3;
+}
+
+.find-bar.dark-theme button {
+    background: #2d2d2d;
+    border-color: #3d3d3d;
+    color: #d4d4d4;
+}
+
+.find-bar.dark-theme button:hover {
+    background: #3d3d3d;
+}
+
+.find-bar.dark-theme button:active {
+    background: #4d4d4d;
+}

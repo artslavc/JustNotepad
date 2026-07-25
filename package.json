@@ -1,10 +1,30 @@
 {
-  "name": "notesapp",
+  "name": "justnotepad",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Simple notepad with dark theme, wallpapers, and Russian/English UI",
+  "main": "src/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.justnotepad.app",
+    "productName": "JustNotepad",
+    "icon": "build/notes.png",
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    },
+    "fileAssociations": [
+      {
+        "ext": "txt",
+        "description": "Text file"
+      }
+    ]
   },
   "keywords": [],
   "author": "",
@@ -12,6 +32,6 @@
   "type": "commonjs",
   "devDependencies": {
     "electron": "^43.1.0",
-    "electron-reload": "^2.0.0-alpha.1"
+    "electron-builder": "^26.15.3"
   }
 }

@@ -1,0 +1,32 @@
+const lang = {
+    ru: {
+        file: 'Файл', edit: 'Правка', view: 'Вид',
+        newWindow: 'Новое окно', newFile: 'Создать', open: 'Открыть', save: 'Сохранить',
+        recent: 'Последние заметки', autosave: 'Автосохранение',
+        undo: 'Отменить', cut: 'Вырезать', copy: 'Копировать', paste: 'Вставить',
+        del: 'Удалить', find: 'Найти', replace: 'Заменить', selectAll: 'Выделить все',
+        theme: 'Темная тема', zoom: 'Масштаб', resetZoom: 'Сбросить масштаб',
+        grammar: 'Проверка грамматики', margins: 'Равные отступы',
+        wallpapers: 'Обои', langLabel: 'Язык / Language',
+        wpNone: 'Нет', wpForestEvening: 'Закат в лесу', wpForestTuchi: 'Туман в лесу',
+        wpSand: 'Жаркая пустыня', wpNewyork: 'Нью-Йорк', wpVlad: 'Владивосток', wpBeach: 'Пляж',
+        noNotes: 'Нет заметок', none: 'Нет',
+        findPlaceholder: 'Найти...', replacePlaceholder: 'Заменить на...',
+        findBack: 'Назад', findNext: 'Далее', replaceBtn: 'Заменить', replaceAll: 'Заменить всё',
+    },
+    en: {
+        file: 'File', edit: 'Edit', view: 'View',
+        newWindow: 'New Window', newFile: 'New', open: 'Open', save: 'Save',
+        recent: 'Recent Notes', autosave: 'Autosave',
+        undo: 'Undo', cut: 'Cut', copy: 'Copy', paste: 'Paste',
+        del: 'Delete', find: 'Find', replace: 'Replace', selectAll: 'Select All',
+        theme: 'Dark Theme', zoom: 'Zoom', resetZoom: 'Reset Zoom',
+        grammar: 'Grammar Check', margins: 'Uniform Margins',
+        wallpapers: 'Wallpapers', langLabel: 'Language / Язык',
+        wpNone: 'None', wpForestEvening: 'Sunset in Forest', wpForestTuchi: 'Fog in Forest',
+        wpSand: 'Hot Desert', wpNewyork: 'New York', wpVlad: 'Vladivostok', wpBeach: 'Beach',
+        noNotes: 'No notes', none: 'None',
+        findPlaceholder: 'Find...', replacePlaceholder: 'Replace with...',
+        findBack: 'Back', findNext: 'Next', replaceBtn: 'Replace', replaceAll: 'Replace All',
+    }
+};

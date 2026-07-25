@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Блокнот</title>
+</head>
+<body>
+    <div class="title-bar">
+        <div class="title-bar-text" id="titleText">JustNotepad <span id="fileInfo" style="font-weight:300;font-size:12px;">- NewFile</span><span id="unsavedStar" style="font-weight:300;font-size:12px;color:#e00;display:none;"> *</span></div>
+        <div class="title-bar-controls">
+            <button id="minBtn">─</button>
+            <button id="maxBtn">☐</button>
+            <button id="closeBtn">✕</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="button-overlay">
+            <button id="fileBtn">Файл</button>
+            <button id="editBtn">Правка</button>
+            <button id="viewBtn">Вид</button>
+        </div>
+    </header>
+
+    <main contenteditable="true" id="mainContent"></main>
+
+    <div class="dropdown-menu" id="editMenu">
+        <div class="menu-item" id="undoItem"><span>Отменить</span><span class="shortcut-hint">Ctrl+Z</span></div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" id="cutItem"><span>Вырезать</span><span class="shortcut-hint">Ctrl+X</span></div>
+        <div class="menu-item" id="copyItem"><span>Копировать</span><span class="shortcut-hint">Ctrl+C</span></div>
+        <div class="menu-item" id="pasteItem"><span>Вставить</span><span class="shortcut-hint">Ctrl+V</span></div>
+        <div class="menu-item" id="deleteItem"><span>Удалить</span><span class="shortcut-hint">Del</span></div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" id="findItem"><span>Найти</span><span class="shortcut-hint">Ctrl+F</span></div>
+        <div class="menu-item" id="replaceItem"><span>Заменить</span><span class="shortcut-hint">Ctrl+H</span></div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" id="selectAllItem"><span>Выделить все</span><span class="shortcut-hint">Ctrl+A</span></div>
+    </div>
+
+    <div class="dropdown-menu" id="fileMenu">
+        <div class="menu-item" id="newWindowItem"><span>Новое окно</span><span class="shortcut-hint">Ctrl+Shift+N</span></div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" id="newFileItem"><span>Создать</span><span class="shortcut-hint">Ctrl+N</span></div>
+        <div class="menu-item" id="openItem"><span>Открыть</span><span class="shortcut-hint">Ctrl+O</span></div>
+        <div class="menu-item" id="saveItem"><span>Сохранить</span><span class="shortcut-hint">Ctrl+S</span></div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" id="recentItem" style="cursor:pointer;">
+            <span>Последние заметки</span>
+            <span style="color:#888;font-size:12px;" id="recentCount">0</span>
+        </div>
+        <div class="recent-submenu" id="recentSubmenu"></div>
+        <div class="menu-divider"></div>
+        <div class="menu-item">
+            <span>Автосохранение</span>
+            <label class="switch">
+                <input type="checkbox" id="autosaveToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="dropdown-menu" id="viewMenu">
+        <div class="menu-item">
+            <span>Темная тема</span>
+            <label class="switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item">
+            <span>Масштаб</span>
+            <div class="zoom-controls">
+                <button id="zoomOut">−</button>
+                <span id="zoomLevel">100%</span>
+                <button id="zoomIn">+</button>
+            </div>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item">
+            <button id="resetZoom" style="background: none; border: none; cursor: pointer; font-size: 13px; color: #333; width: 100%; text-align: left; padding: 4px 0;">Сбросить масштаб</button>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item">
+            <span>Проверка грамматики</span>
+            <label class="switch">
+                <input type="checkbox" id="grammarToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item">
+            <span>Равные отступы</span>
+            <label class="switch">
+                <input type="checkbox" id="marginToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" id="wallpaperItem" style="cursor: pointer;">
+            <span>Обои</span>
+            <span style="color:#888;font-size:12px;" id="wallpaperName">Нет</span>
+        </div>
+        <div class="wallpaper-submenu" id="wallpaperSubmenu">
+            <div class="menu-item wallpaper-option" id="wpNone" data-wallpaper="">Нет</div>
+            <div class="menu-item wallpaper-option" id="wpForestEvening" data-wallpaper="forest_evening.jpg">Закат в лесу</div>
+            <div class="menu-item wallpaper-option" id="wpForestTuchi" data-wallpaper="forest_tuchi.jpg">Туман в лесу</div>
+            <div class="menu-item wallpaper-option" id="wpSand" data-wallpaper="sand.jpg">Жаркая пустыня</div>
+            <div class="menu-item wallpaper-option" id="wpNewyork" data-wallpaper="newyork.jpg">Нью-Йорк</div>
+            <div class="menu-item wallpaper-option" id="wpVlad" data-wallpaper="vladivostock.jpeg">Владивосток</div>
+            <div class="menu-item wallpaper-option" id="wpBeach" data-wallpaper="beach.jpg">Пляж</div>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" id="langItem" style="cursor:pointer;">
+            <span id="langLabel">Язык / Language</span>
+            <span id="langDisplay" style="color:#888;font-size:12px;font-weight:600;">RU</span>
+        </div>
+    </div>
+
+    <div class="find-bar" id="findBar">
+        <div class="find-row">
+            <input type="text" id="findInput" placeholder="Найти...">
+            <button id="findPrevBtn">Назад</button>
+            <button id="findNextBtn">Далее</button>
+            <button id="findCloseBtn">✕</button>
+        </div>
+        <div class="find-row" id="replaceRow">
+            <input type="text" id="replaceInput" placeholder="Заменить на...">
+            <button id="replaceOneBtn">Заменить</button>
+            <button id="replaceAllBtn">Заменить всё</button>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="renderer.js"></script>
+</body>
+</html>
